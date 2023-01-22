@@ -81,7 +81,7 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
                   {element.heading}
                 </h1>
                 <p className="text-gray-600 lg:max-w-md">{element.description}</p>
-                <video autoPlay loop controls className="rounded-md lg:hidden">
+                <video muted={true} autoPlay={true} loop  className="rounded-md lg:hidden">
                   <source src={element.video} type="video/mp4" />
                   <p>
                     If you are reading this, it is because your browser does not support the HTML5
@@ -91,7 +91,7 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
               </div>
             ))}
           </div>
-          <video src={videosLink[video-1]} autoPlay loop controls className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block">
+          <video src={videosLink[video-1]} muted={true} autoPlay={true} loop  className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block">
           {/* <source src= type="video/mp4" /> */}
                   <p>
                     If you are reading this, it is because your browser does not support the HTML5
