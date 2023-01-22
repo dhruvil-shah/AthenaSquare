@@ -22,6 +22,11 @@ interface Response {
 }
 
 const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
+  const videosLink = [
+    "https://global-uploads.webflow.com/62efc7cb58ad153bfb146988/6341303c29c5340961dc9ae6_Mco-1-transcode.mp4",
+    "https://global-uploads.webflow.com/62efc7cb58ad153bfb146988/63413ff244f1dc616b7148a0_Mco-transcode.mp4",
+    "https://global-uploads.webflow.com/62efc7cb58ad153bfb146988/63455a67996ba248148c4e31_add-options%20(3)-transcode.mp4",
+  ];
   const [video,setVideo]=useState(1)
   const [scroll,setScroll]=useState(0)
   const updateVideo=()=>{
@@ -86,7 +91,7 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
               </div>
             ))}
           </div>
-          <video src={"/video/video"+video+".mp4"} autoPlay loop controls className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block">
+          <video src={videosLink[video-1]} autoPlay loop controls className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block">
           {/* <source src= type="video/mp4" /> */}
                   <p>
                     If you are reading this, it is because your browser does not support the HTML5
