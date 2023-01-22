@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import type { FC } from "react";
 import type { InferGetStaticPropsType } from "next";
@@ -42,19 +41,28 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
             View Kula Outreach
           </button>
         </section>
-        <section className="space-y-4">
-          {data.map((element, index) => (
-            <div key={index} className="space-y-2">
-              <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-sm font-semibold capitalize text-transparent lg:text-base">
-                {element.subHeading}
-              </span>
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 lg:text-5xl">
-                {element.heading}
-              </h1>
-              <p className="text-gray-600">{element.description}</p>
-              <video autoPlay loop src={element.video} />
-            </div>
-          ))}
+        <section className="space-y-16 lg:flex lg:justify-between lg:space-y-0">
+          <div className="lg:mt-28 lg:space-y-48">
+            {data.map((element, index) => (
+              <div key={index} className="space-y-2">
+                <span className="bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-sm font-semibold capitalize text-transparent lg:text-base">
+                  {element.subHeading}
+                </span>
+                <h1 className="text-4xl font-bold capitalize tracking-tight text-gray-900 lg:text-5xl">
+                  {element.heading}
+                </h1>
+                <p className="text-gray-600 lg:max-w-md">{element.description}</p>
+                <video autoPlay loop className="rounded-md lg:hidden">
+                  <source src={element.video} type="video/mp4" />
+                  <p>
+                    If you are reading this, it is because your browser does not support the HTML5
+                    video element.
+                  </p>
+                </video>
+              </div>
+            ))}
+          </div>
+          <div className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block"></div>
         </section>
         <section className="grid min-h-screen place-content-center gap-4 text-center lg:gap-8">
           <h1 className="mx-auto max-w-3xl text-5xl font-bold tracking-tight text-gray-900 lg:text-6xl">
