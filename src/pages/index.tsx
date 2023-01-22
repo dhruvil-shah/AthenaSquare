@@ -1,7 +1,9 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
-import type { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import Router from "next/router";
 import type { InferGetStaticPropsType } from "next";
+import { log } from "console";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -20,6 +22,28 @@ interface Response {
 }
 
 const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
+  const [video,setVideo]=useState(1)
+  const [scroll,setScroll]=useState(0)
+  const updateVideo=()=>{
+    setScroll(window.scrollY)
+    if(scroll>=0 && scroll<=800){
+      setVideo(1)
+    }else if(scroll>800 && scroll<=1400){
+      setVideo(2)
+    }else{
+      setVideo(3)
+    }
+    console.log(video);
+    
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", updateVideo, { passive: true });
+    return () => {
+       window.removeEventListener("scroll", updateVideo);
+    }
+  },);
+  
+  
   return (
     <>
       <Head>
@@ -52,7 +76,7 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
                   {element.heading}
                 </h1>
                 <p className="text-gray-600 lg:max-w-md">{element.description}</p>
-                <video autoPlay loop className="rounded-md lg:hidden">
+                <video autoPlay loop controls className="rounded-md lg:hidden">
                   <source src={element.video} type="video/mp4" />
                   <p>
                     If you are reading this, it is because your browser does not support the HTML5
@@ -62,7 +86,13 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ data }) => {
               </div>
             ))}
           </div>
-          <div className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block"></div>
+          <video src={"/video/video"+video+".mp4"} autoPlay loop controls className="hidden aspect-square h-full w-[32rem] flex-shrink-0 rounded-md bg-gray-200 lg:sticky lg:top-16 lg:block">
+          {/* <source src= type="video/mp4" /> */}
+                  <p>
+                    If you are reading this, it is because your browser does not support the HTML5
+                    video element.
+                  </p>
+          </video>
         </section>
         <section className="grid min-h-screen place-content-center gap-4 text-center lg:gap-8">
           <h1 className="mx-auto max-w-3xl text-5xl font-bold tracking-tight text-gray-900 lg:text-6xl">
